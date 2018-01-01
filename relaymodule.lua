@@ -8,10 +8,10 @@ function processData(data)
   for i=0,7,1 do
   	if bit.isset(data, i) then
     	print("Switch " .. i .. " is on")
-    	gpio.write(i+1, gpio.HIGH)
+    	gpio.write(i+1, gpio.LOW)
     else
     	print("Switch " .. i .. " is off")
-    	gpio.write(i+1, gpio.LOW)
+    	gpio.write(i+1, gpio.HIGH)
     end
   end
 end
@@ -24,6 +24,7 @@ end
 
 function start()
 	print("Started")
+
 	connection = redis.connect(REDIS_SERVER)
 	connection:subscribe("state." .. PACK_ID, onUpdate)
 
